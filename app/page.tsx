@@ -1,9 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
+
+interface Book {
+  id: string;
+  title: string;
+  author: string;
+}
 
 export default function Home() {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [loading, setLoading] = useState(false);
@@ -23,7 +29,7 @@ export default function Home() {
     }
   };
 
-  const addBook = async (e) => {
+  const addBook = async (e: FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
 
@@ -47,7 +53,7 @@ export default function Home() {
     }
   };
 
-  const deleteBook = async (id) => {
+  const deleteBook = async (id: string) => {
     try {
       const res = await fetch(`/api/books?id=${id}`, {
         method: 'DELETE',
@@ -95,7 +101,7 @@ export default function Home() {
         <p>No books currently in the list.</p>
       ) : (
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          {books.map((book) => (
+          {books.map((book: Book) => (
             <li key={book.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #eee' }}>
               <div>
                 <strong>{book.title}</strong> <span style={{ color: '#666' }}>by {book.author}</span>
