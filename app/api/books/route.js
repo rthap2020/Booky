@@ -13,7 +13,7 @@ async function getBooks() {
     return JSON.parse(data);
   } catch (error) {
     const defaultBooks = [
-      { id: '1', title: 'The Pragmatic Programmer', author: 'Andrew Hunt & David Thomas' },
+      { id: '1', title: 'A Clash of Kings', author: 'George R.R. Martin' },
       { id: '2', title: 'Design Patterns', author: 'Erich Gamma et al.' }
     ];
     await fs.writeFile(filePath, JSON.stringify(defaultBooks, null, 2));
